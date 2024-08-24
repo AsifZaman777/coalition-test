@@ -22,7 +22,7 @@ const generateMonthLabels = (timeRange) => {
       endDate = new Date(referenceDate.getFullYear() - 1, 11, 31); // December 31st of the previous year
       break;
     case 'All Time':
-      startDate = new Date('2023-01-01'); 
+      startDate = new Date('2022-03-01'); 
       endDate = referenceDate;
       break;
     default:
@@ -101,6 +101,7 @@ export const usePatients = (timeRange) => {
           systolic: systolicData,
           diastolic: diastolicData,
         });
+        console.log('Data:', data);
 
       } catch (error) {
         console.error('Error fetching data:', error);

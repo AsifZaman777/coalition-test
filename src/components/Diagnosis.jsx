@@ -3,15 +3,32 @@ import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
 import { usePatients } from '../hooks/API_data'; // Adjust the path as needed
 
+import heart from '../assets/images/heart.png';
+import thermo from '../assets/images/thermo.png';
+import lungs from '../assets/images/lungh.png';
+
 const Diagnosis = () => {
   const [timeRange, setTimeRange] = useState('All Time');
-  const { loading, bloodPressureData } = usePatients(timeRange);
+  const { loading, bloodPressureData, patients } = usePatients(timeRange);
 
   const handleTimeRangeChange = (event) => {
     setTimeRange(event.target.value);
   };
 
   if (loading) return <p>Loading...</p>;
+
+  //jessica taylor data
+  const latestDiagnosis = patients[3]?.diagnosis_history[0] || {};
+
+  //values
+  const respiratoryRate = latestDiagnosis.respiratory_rate?.value || 'N/A';
+  const temperature = latestDiagnosis.temperature?.value || 'N/A';
+  const heartRate = latestDiagnosis.heart_rate?.value || 'N/A';
+
+  //status
+  const respiratoryRateStatus = latestDiagnosis.respiratory_rate?.levels || 'N/A';
+  const temperatureStatus = latestDiagnosis.temperature?.levels || 'N/A';
+  const heartRateStatus = latestDiagnosis.heart_rate?.levels || 'N/A';
 
   const data = {
     labels: bloodPressureData.labels,
@@ -78,20 +95,26 @@ const Diagnosis = () => {
       </div>
 
       <div className="grid grid-cols-3 gap-4 mt-6">
-        <div className="flex flex-col items-center bg-blue-50 rounded-lg p-4 shadow-sm">
-          <img src="/icons/respiratory-rate.svg" alt="Respiratory Rate" className="w-12 h-12 mb-2" />
-          <p className="text-xl font-semibold">72 bpm</p>
-          <p className="text-gray-600">Normal</p>
+        <div className="flex flex-col bg-blue-50 rounded-lg p-4 shadow-sm">
+          <img src={lungs} alt="Respiratory Rate" className="w-28 h-28 mb-2" />
+          <p className="text-xl font-semibold">Respiratory rate</p>
+          <p className="text-4xl font-bold">{respiratoryRate} bpm</p>
+          <div className="h-10"></div>
+          <p className={`text-gray-700 font-medium ${respiratoryRateStatus === 'Normal' ? 'text-green-500' : 'text-red-500'}`}>{respiratoryRateStatus}</p>
         </div>
-        <div className="flex flex-col items-center bg-pink-50 rounded-lg p-4 shadow-sm">
-          <img src="/icons/temperature.svg" alt="Temperature" className="w-12 h-12 mb-2" />
-          <p className="text-xl font-semibold">98.6°F</p>
-          <p className="text-gray-600">Normal</p>
+        <div className="flex flex-col bg-pink-50 rounded-lg p-4 shadow-sm">
+          <img src={thermo} alt="Temperature" className="w-28 h-28 mb-2" />
+          <p className="text-xl font-semibold">Temperature</p>
+          <p className="text-4xl font-bold">{temperature}°F</p>
+          <div className="h-10"></div>
+          <p className={`text-gray-700 font-medium ${temperatureStatus === 'Normal' ? 'text-green-500' : 'text-red-500'}`}>{temperatureStatus}</p>
         </div>
-        <div className="flex flex-col items-center bg-red-50 rounded-lg p-4 shadow-sm">
-          <img src="/icons/heart-rate.svg" alt="Heart Rate" className="w-12 h-12 mb-2" />
-          <p className="text-xl font-semibold">80 bpm</p>
-          <p className="text-gray-600">Lower than Average</p>
+        <div className="flex flex-col bg-red-50 rounded-lg p-4 shadow-sm">
+          <img src={heart} alt="Heart Rate" className="w-28 h-28 mb-2" />
+          <p className="text-xl font-semibold">Heart Rate</p>
+          <p className="text-4xl font-bold">{heartRate} bpm</p>
+          <div className="h-10"></div>
+          <p className={`text-gray-700 font-medium ${heartRateStatus === 'Normal' ? 'text-green-500' : 'text-red-500'}`}>{heartRateStatus}</p>
         </div>
       </div>
     </div>
