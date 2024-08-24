@@ -1,6 +1,5 @@
-import { useState } from 'react';
 import { FiHome, FiUsers, FiCalendar, FiMessageSquare, FiCreditCard, FiSettings, FiMoreVertical } from 'react-icons/fi';
-import doctorImage from '../../../assets/images/doctor.jpg'; // Update the path to your doctor image
+import doctorImage from '../assets/images/doctor.jpg'; // Update the path to your doctor image
 
 const NavBar = () => {
 
