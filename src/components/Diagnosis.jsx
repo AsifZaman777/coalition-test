@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
-import { usePatients } from '../hooks/API_data'; // Adjust the path as needed
+import { usePatients } from '../hooks/API_data'; 
 
 import heart from '../assets/images/heart.png';
 import thermo from '../assets/images/thermo.png';
