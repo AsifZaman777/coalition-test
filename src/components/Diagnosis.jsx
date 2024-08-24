@@ -67,7 +67,7 @@ const Diagnosis = () => {
 
   return (
     <div className="p-6 bg-white rounded-lg shadow-md max-w-[100%] mt-10">
-      <h2 className="text-xl font-semibold mb-4">Diagnosis History</h2>
+      <h2 className="text-2xl font-bold mb-4">Diagnosis History</h2>
       <div className="bg-gray-50 rounded-lg p-4 shadow-sm">
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-lg font-medium">Blood Pressure</h3>
